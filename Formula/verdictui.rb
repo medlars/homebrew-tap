@@ -7,7 +7,8 @@ class Verdictui < Formula
   head "https://github.com/medlars/verdictui.git", branch: "main"
 
   depends_on xcode: ["15.0", :build]
-  depends_on :macos
+  # `macos: :ventura` already implies macOS, so a bare `depends_on :macos`
+  # beside it is redundant AND deprecated — Homebrew warns on every load.
   depends_on macos: :ventura
 
   def install

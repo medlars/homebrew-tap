@@ -1,5 +1,5 @@
 class Verdictui < Formula
-  desc "SwiftUI verification engine that replaces the screenshot-wait-click-confirm cycle"
+  desc "SwiftUI verification engine giving semantic verdicts, not screenshots"
   homepage "https://github.com/medlars/verdictui"
   url "https://github.com/medlars/verdictui/archive/refs/tags/v1.0.0.tar.gz"
   sha256 "7845d41ec906bb1616e7d3f1977efd60e95e9965c0be16343a10ccc9845abe58"

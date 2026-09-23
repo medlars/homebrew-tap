@@ -1,8 +1,8 @@
 class Verdictui < Formula
   desc "SwiftUI verification engine giving semantic verdicts, not screenshots"
   homepage "https://github.com/medlars/verdictui"
-  url "https://github.com/medlars/verdictui/archive/refs/tags/v1.1.1.tar.gz"
-  sha256 "383b537b863a5783d8a7420d51e847ef5ea6b2b6422c9049fb52534917939956"
+  url "https://github.com/medlars/verdictui/archive/refs/tags/v1.1.2.tar.gz"
+  sha256 "bd1e97dc682f92e7e689e434f07a016161b963c0963f89660c0f0a12cd5e3512"
   license "MIT"
   head "https://github.com/medlars/verdictui.git", branch: "main"
 

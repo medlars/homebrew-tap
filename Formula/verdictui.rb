@@ -1,12 +1,12 @@
 class Verdictui < Formula
   desc "SwiftUI verification engine giving semantic verdicts, not screenshots"
   homepage "https://github.com/medlars/verdictui"
-  url "https://github.com/medlars/verdictui/archive/refs/tags/v1.0.1.tar.gz"
-  sha256 "2ce0f4d413a7555f5a71cb9512fb58255dd45f5f79cc8a67534257ac2c9dcfa3"
+  url "https://github.com/medlars/verdictui/archive/refs/tags/v1.1.0.tar.gz"
+  sha256 "297ed64dc264d85520ceecf195665f33acdb9ac555108ccbd74cd9d5ac87a891"
   license "MIT"
   head "https://github.com/medlars/verdictui.git", branch: "main"
 
-  depends_on xcode: ["15.0", :build]
+  depends_on xcode: ["16.0", :build]
   # `macos: :ventura` already implies macOS, so a bare `depends_on :macos`
   # beside it is redundant AND deprecated — Homebrew warns on every load.
   depends_on macos: :ventura

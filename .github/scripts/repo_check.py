@@ -10,7 +10,17 @@ from pathlib import Path
 import yaml
 
 TEXT_SUFFIXES = (".md", ".mdx", ".html", ".js", ".ts", ".mjs", ".css", ".txt")
-CONFLICT = re.compile(r"^(<{7}|>{7}) ", re.MULTILINE)
+CONFLICT_MARKS = (re.compile(r"^<{7}( |$)", re.MULTILINE), re.compile(r"^={7}$", re.MULTILINE),
+                  re.compile(r"^>{7}( |$)", re.MULTILINE))
+FENCE = re.compile(r"^(```|~~~).*?^\1[^\n]*$", re.MULTILINE | re.DOTALL)
+
+
+def has_conflict(path: Path) -> bool:
+    """All three markers together; Markdown code fences are documentation, not conflicts."""
+    text = path.read_text(encoding="utf-8", errors="ignore")
+    if path.suffix.lower() in {".md", ".mdx"}:
+        text = FENCE.sub("", text)
+    return all(mark.search(text) for mark in CONFLICT_MARKS)
 PARSE_ERRORS = (OSError, ValueError, UnicodeDecodeError, SyntaxError, py_compile.PyCompileError,
                 tomllib.TOMLDecodeError, yaml.YAMLError, plistlib.InvalidFileException)
 
@@ -39,7 +49,7 @@ def check(path: Path) -> str:
         plistlib.loads(path.read_bytes())
     else:
         kind = ""
-    if (kind or path.suffix.lower() in TEXT_SUFFIXES) and CONFLICT.search(path.read_text(encoding="utf-8", errors="ignore")):
+    if (kind or path.suffix.lower() in TEXT_SUFFIXES) and has_conflict(path):
         raise ValueError("merge-conflict marker committed")
     return kind
 

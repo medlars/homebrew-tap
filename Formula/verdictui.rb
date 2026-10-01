@@ -1,22 +1,19 @@
 class Verdictui < Formula
   desc "SwiftUI verification engine giving semantic verdicts, not screenshots"
-  homepage "https://github.com/medlars/verdictui"
-  url "https://github.com/medlars/verdictui/archive/refs/tags/v1.1.4.tar.gz"
-  sha256 "edddd211540b31a0185361fef4a6ee2e35e9ee5a39186323856a4e0e09c21310"
+  homepage "https://github.com/medlars/verdictui-releases"
+  # The source repo is private; this is the signed + notarized universal
+  # binary published to the public assets-only releases repo.
+  url "https://github.com/medlars/verdictui-releases/releases/download/v1.1.4/verdictui-1.1.4-macos-universal.zip"
+  sha256 "bd497b340cb32a5087dbc82c84f5dba1ef36a0f0b20503154eee815cf22df386"
   license "MIT"
-  head "https://github.com/medlars/verdictui.git", branch: "main"
 
-  depends_on xcode: ["16.0", :build]
   # `macos: :ventura` already implies macOS, so a bare `depends_on :macos`
   # beside it is redundant AND deprecated — Homebrew warns on every load.
+  # Ventura matches the binary's LC_BUILD_VERSION minos 13.0.
   depends_on macos: :ventura
 
   def install
-    system "swift", "build",
-           "--disable-sandbox",
-           "-c", "release",
-           "--product", "verdictui"
-    bin.install ".build/release/verdictui"
+    bin.install "verdictui"
   end
 
   test do

@@ -8,9 +8,9 @@ brew tap medlars/tap
 
 ## Formulae
 
-| Formula     | Version | Status    |
-| ----------- | ------- | --------- |
-| `verdictui` | 1.0.1   | Available |
+| Formula     | Status    |
+| ----------- | --------- |
+| `verdictui` | Available |
 
 ### `verdictui`
 
@@ -27,7 +27,4 @@ and failed, `2` no verdict could be produced. The third value is deliberate — 
 tool reporting "not passing" for both a broken layout and an unreadable scenario
 forces callers to treat infrastructure faults as product defects.
 
-Builds from source (Swift 5.10, macOS 13+), so the first install compiles the
-release binary.
-
-Source and documentation: <https://github.com/medlars/verdictui>
+Homepage: <https://github.com/medlars/verdictui-releases>

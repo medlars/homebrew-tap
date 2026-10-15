@@ -1,0 +1,22 @@
+name: hold-label
+# A PR labelled `hold` or `do-not-merge` must not merge, whoever presses merge. As a required
+# check this job fails while either label is present. It checks out no code and needs no token
+# scopes, so it is safe on a public repo; labeled/unlabeled re-run it so the verdict follows the label.
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled, unlabeled]
+permissions: {}
+jobs:
+  hold-label:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Refuse a held pull request
+        env:
+          LABELS: ${{ toJSON(github.event.pull_request.labels.*.name) }}
+        run: |
+          if printf '%s' "$LABELS" | grep -Eqi '"(hold|do-not-merge)"'; then
+            echo "::error::PR is held: remove the hold / do-not-merge label to merge"
+            exit 1
+          fi
+          echo "not held"
